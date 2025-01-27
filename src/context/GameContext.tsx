@@ -62,9 +62,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }, [board, selectedCell, presetCells]);
 
   const startNewGame = useCallback(() => {
-    const { board: newBoard, preset: newPreset } = generateSudoku();
+    const { board: newBoard, preset: newPreset, solution: newSolution } = generateSudoku();
     setBoard(newBoard);
     setPresetCells(newPreset);
+    setSolution(newSolution);
     setSelectedCell(null);
     setIsGameComplete(false);
     setTimer(0);

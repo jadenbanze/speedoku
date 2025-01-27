@@ -16,6 +16,8 @@ type GameContextType = {
   hintsEnabled: boolean;
   toggleHints: () => void;
   solution: (number | null)[][];
+  setTimer: (value: number | ((prev: number) => number)) => void;
+  solveGame: () => void;
 };
 
 const createEmptyBoard = () => Array(9).fill(null).map(() => Array(9).fill(null));
@@ -79,6 +81,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setBoard(newBoard);
   }, [board, selectedCell, presetCells]);
 
+  const solveGame = useCallback(() => {
+    setBoard(solution);
+    setIsGameComplete(true);
+  }, [solution]);
+
   return (
     <GameContext.Provider value={{
       board,
@@ -93,6 +100,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       hintsEnabled,
       toggleHints,
       solution,
+      setTimer,
+      solveGame,
     }}>
       {children}
     </GameContext.Provider>

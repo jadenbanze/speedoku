@@ -4,6 +4,9 @@ import dynamic from 'next/dynamic';
 import { GameProvider } from '@/context/GameContext';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { HintsToggle } from '@/components/HintsToggle';
+import { Timer } from '@/components/Timer';
+import { GameControls } from '@/components/GameControls';
+import { CompletionModal } from '@/components/CompletionModal';
 
 // Dynamically import components with ssr disabled
 const SudokuBoard = dynamic(() => import('@/components/SudokuBoard'), {
@@ -24,10 +27,13 @@ export default function Home() {
         <>
           <HintsToggle />
           <h1 className="text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">speedoku</h1>
+          <Timer />
           <div className="flex flex-col items-center max-w-full">
             <SudokuBoard />
             <NumberPad />
+            <GameControls />
           </div>
+          <CompletionModal />
         </>
       </GameProvider>
     </main>
